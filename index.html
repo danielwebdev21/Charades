@@ -1,0 +1,170 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app-container">
+      <section id="screen-menu" class="screen">
+        <button id="fullscreen-btn" class="secondary-btn">
+          🔲 Pantalla Completa
+        </button>
+        <p>Selecciona una categoría:</p>
+        <!-- Botones de categoría aquí -->
+        <div id="category-container" class="category-grid">
+          <!-- Example of a single category button -->
+          <button class="category-btn" data-category="Harry Potter">
+            <img
+              src="images/harry_potter.png"
+              alt="Icono de Harry Potter"
+              class="category-icon"
+            />
+            <span class="category-name">Harry Potter</span>
+          </button>
+
+          <button class="category-btn" data-category="Barcelona">
+            <img
+              src="images/barcelona.png"
+              alt="Icono de Barcelona"
+              class="category-icon"
+            />
+            <span class="category-name">Barcelona</span>
+          </button>
+
+          <button class="category-btn" data-category="Colombia">
+            <img
+              src="images/colombia.png"
+              alt="Icono de Colombia"
+              class="category-icon"
+            />
+            <span class="category-name">Colombia</span>
+          </button>
+
+          <button class="category-btn" data-category="Animales">
+            <img
+              src="images/animales.png"
+              alt="Icono de Animales"
+              class="category-icon"
+            />
+            <span class="category-name">Animales</span>
+          </button>
+
+          <button class="category-btn" data-category="Disney">
+            <img
+              src="images/disney.png"
+              alt="Icono de Personajes de Disney"
+              class="category-icon"
+            />
+            <span class="category-name">Disney</span>
+          </button>
+
+          <button class="category-btn" data-category="Profesiones">
+            <img
+              src="images/profesiones.png"
+              alt="Icono de Profesiones"
+              class="category-icon"
+            />
+            <span class="category-name">Profesiones</span>
+          </button>
+
+          <button class="category-btn" data-category="Verano">
+            <img
+              src="images/verano.png"
+              alt="Icono de Verano"
+              class="category-icon"
+            />
+            <span class="category-name">Verano</span>
+          </button>
+
+          <button class="category-btn" data-category="Invierno">
+            <img
+              src="images/invierno.png"
+              alt="Icono de Invierno"
+              class="category-icon"
+            />
+            <span class="category-name">Invierno</span>
+          </button>
+
+          <button class="category-btn" data-category="Marcas">
+            <img
+              src="images/marcas.png"
+              alt="Icono de Marcas"
+              class="category-icon"
+            />
+            <span class="category-name">Marcas</span>
+          </button>
+
+          <button class="category-btn" data-category="Música">
+            <img
+              src="images/musica.png"
+              alt="Icono de Música"
+              class="category-icon"
+            />
+            <span class="category-name">Música</span>
+          </button>
+
+          <button class="category-btn" data-category="Famosos">
+            <img
+              src="images/famosos.png"
+              alt="Icono de Famosos"
+              class="category-icon"
+            />
+            <span class="category-name">Famosos</span>
+          </button>
+        </div>
+        <!-- <button id="btn-start" onclick="startGame()">¡Jugar!</button> -->
+      </section>
+
+      <!-- SCREEN 2: GAMEPLAY -->
+      <!-- Notice the 'hidden' class -->
+      <section id="screen-game" class="screen hidden">
+        <!-- View 1: Instructions (Visible first) -->
+        <div id="instructions-view">
+          <h2>¡Pon el celular en tu frente!</h2>
+          <p>👇 Flip up = ¡Correct!</p>
+          <p>👆 Flip down = Skip</p>
+        </div>
+
+        <!-- View 2: Countdown (Hidden initially) -->
+        <div id="countdown-view" class="hidden">
+          <h1 id="countdown-number" style="font-size: 6rem; margin: 0">3</h1>
+        </div>
+
+        <!-- View 3: Active Game (Hidden initially) -->
+        <div id="active-game-view" class="hidden">
+          <div
+            id="timer"
+            style="font-size: 2rem; font-weight: bold; color: #ff4757"
+          >
+            60
+          </div>
+          <h1 id="current-word" style="font-size: 4rem; margin: 20px 0">
+            ¡Preparado!
+          </h1>
+        </div>
+      </section>
+
+      <!-- SCREEN 3: RESULTADOS -->
+      <section id="screen-results" class="screen hidden">
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px; color: #333">
+          ¡Tiempo Terminado!
+        </h2>
+
+        <p style="font-size: 1.2rem; margin-bottom: 40px; color: #666">
+          Lograste adivinar:<br />
+          <span
+            id="final-score"
+            style="font-size: 5rem; font-weight: bold; color: #ff4757"
+            >0</span
+          ><br />
+          palabras
+        </p>
+
+        <button class="go-to-menu-btn">Jugar Otra Vez</button>
+      </section>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>

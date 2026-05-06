@@ -1,0 +1,89 @@
+/* --- Base Styles & Utilities --- */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #0d78e4; /* Slight off-white background makes the white buttons pop */
+}
+
+.hidden {
+  display: none !important;
+}
+
+.screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  box-sizing: border-box; /* Prevents padding from breaking the 100vh height */
+}
+
+/* --- The Grid Layout --- */
+.category-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* This creates the two equal columns */
+  gap: 20px; /* Space between buttons */
+  width: 100%;
+  max-width: 400px; /* Prevents it from getting too wide on desktop monitors */
+  margin-top: 20px;
+}
+
+/* --- The Buttons --- */
+.category-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ffffff;
+  border: none; /* Removing the default button border looks cleaner */
+  border-radius: 20px; /* The round borders you requested */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* The soft shadow */
+
+  padding: 15px 10px;
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Forces the buttons to be perfect squares */
+
+  transition: transform 0.1s ease; /* Smooth animation for tapping */
+}
+
+/* Adds a nice "press" effect when a mobile user taps the button */
+.category-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Icon and Text --- */
+.category-icon {
+  width: 55px;
+  height: 55px;
+  margin-bottom: 12px;
+  object-fit: contain; /* Prevents your icons from squishing */
+}
+
+.category-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.secondary-btn {
+  background-color: transparent;
+  color: #666;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.secondary-btn:active {
+  background-color: #eee;
+  transform: scale(0.95);
+}
