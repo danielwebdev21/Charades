@@ -135,6 +135,9 @@
       <!-- SCREEN 2: GAMEPLAY -->
       <!-- Notice the 'hidden' class -->
       <section id="screen-game" class="screen hidden">
+        <div id="flash-overlay" class="hidden">
+          <h1 id="flash-text"></h1>
+        </div>
         <!-- View 1: Instructions (Visible first) -->
         <div id="instructions-view">
           <h2>¡Pon el celular en tu frente!</h2>
@@ -176,6 +179,17 @@
           ><br />
           palabras
         </p>
+
+        <div class="results-lists">
+          <div class="list-column">
+            <h3 style="color: #4cd137">Adivinadas</h3>
+            <ul id="correct-list"></ul>
+          </div>
+          <div class="list-column">
+            <h3 style="color: #ff4757">Pasadas</h3>
+            <ul id="skipped-list"></ul>
+          </div>
+        </div>
 
         <button class="go-to-menu-btn">Jugar Otra Vez</button>
       </section>

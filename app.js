@@ -669,8 +669,11 @@ const charadesData = [
       "El Manaba",
       "La Oficina",
       "La Desayunería",
-      "Lamerica",
+      "Lamberico",
       "Chambala",
+      "No suena nada mal",
+      "Casa Carmen",
+      "Aldi",
     ],
   },
 ];
@@ -688,6 +691,12 @@ const currentWordDisplay = document.getElementById("current-word");
 const screenResults = document.getElementById("screen-results"); // Make sure this is in your HTML!
 const finalScoreDisplay = document.getElementById("final-score");
 const goToMenuBtn = document.querySelector(".go-to-menu-btn");
+let currentWord = ""; // Para recordar qué palabra está en pantalla
+let correctWords = []; // Array para palabras adivinadas
+let skippedWords = []; // Array para palabras saltadas
+
+const flashOverlay = document.getElementById("flash-overlay");
+const flashText = document.getElementById("flash-text");
 
 let score = 0;
 let timeLeft = 60;
@@ -843,6 +852,8 @@ function startGameplay(category) {
 
   // 3. Reset the game stats
   score = 0;
+  correctWords = [];
+  skippedWords = [];
   timeLeft = 10;
   timerDisplay.innerText = timeLeft;
   timerDisplay.style.color = "#ff4757"; // Reset color to default (optional)
@@ -879,37 +890,68 @@ function showNextWord() {
 
   // 2. Remove that exact word from our temporary array and store it in a variable
   // .splice() returns an array of removed items, so we grab the first one [0]
-  const selectedWord = currentWordsList.splice(randomIndex, 1)[0];
-
-  // 3. Display the word on the screen
-  currentWordDisplay.innerText = selectedWord;
+  currentWord = currentWordsList.splice(randomIndex, 1)[0];
+  currentWordDisplay.innerText = currentWord;
 }
 
 function endGame() {
   console.log("¡Tiempo terminado!");
-
-  // 1. Stop the clock so it doesn't go into negative numbers
   clearInterval(timerInterval);
-
-  // 2. Set the playing flag to false (this will lock the phone motion sensors later)
   playing = false;
 
-  // 3. Hide the game screen and show the results screen
   screenGame.classList.add("hidden");
   screenResults.classList.remove("hidden");
-
-  // 4. Update the final score text
   finalScoreDisplay.innerText = score;
+
+  // --- NUEVO: Llenar las listas de resultados ---
+  const correctListUI = document.getElementById("correct-list");
+  const skippedListUI = document.getElementById("skipped-list");
+
+  // Limpiar listas anteriores (importante si juegan más de una vez)
+  correctListUI.innerHTML = "";
+  skippedListUI.innerHTML = "";
+
+  // Insertar palabras correctas
+  correctWords.forEach((word) => {
+    const li = document.createElement("li");
+    li.innerText = "✅ " + word;
+    correctListUI.appendChild(li);
+  });
+
+  // Insertar palabras saltadas
+  skippedWords.forEach((word) => {
+    const li = document.createElement("li");
+    li.innerText = "❌ " + word;
+    skippedListUI.appendChild(li);
+  });
 }
 
+function triggerFeedback(text, bgColor, vibratePattern) {
+  // 1. Vibración (Revisamos si el navegador lo soporta. Android sí, iOS Safari usualmente no).
+  if ("vibrate" in navigator) {
+    navigator.vibrate(vibratePattern);
+  }
+
+  // 2. Destello Visual
+  flashText.innerText = text;
+  flashOverlay.style.backgroundColor = bgColor;
+  flashOverlay.classList.remove("hidden");
+
+  // 3. Ocultar el destello después de 400 milisegundos
+  setTimeout(() => {
+    flashOverlay.classList.add("hidden");
+  }, 400);
+}
 // --- These will be triggered by your phone motion later ---
 
 function markCorrect() {
-  if (!playing) return; // Don't do anything if the game is over
+  if (!playing) return;
 
-  score++; // Add 1 to the score
+  score++;
+  correctWords.push(currentWord); // Guardar en la lista
 
-  // Optional: Play a "ding!" sound here
+  // Feedback: "¡Correcto!", Verde, Vibración corta (100ms)
+  triggerFeedback("¡Correcto!", "#4cd137", 100);
 
   showNextWord();
 }
@@ -917,9 +959,12 @@ function markCorrect() {
 function skipWord() {
   if (!playing) return;
 
-  // Optional: Play a "buzz" sound here
+  skippedWords.push(currentWord); // Guardar en la lista
 
-  showNextWord(); // Just show the next word without adding to the score
+  // Feedback: "¡Pasó!", Rojo, Vibración doble (100ms vibra, 50ms pausa, 100ms vibra)
+  triggerFeedback("¡Pasó!", "#ff4757", [100, 50, 100]);
+
+  showNextWord();
 }
 
 goToMenuBtn.addEventListener("click", function () {
