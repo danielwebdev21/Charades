@@ -788,7 +788,7 @@ function handleOrientation(event) {
     // Thresholds: You might need to tweak these numbers (45 and -45)
     // depending on what feels natural when testing on your phone.
 
-    if (tilt > 45) {
+    if (tilt > 30) {
       // Phone tilted UP (Screen pointing to the ceiling)
       skipWord();
       isReadyForNextWord = false; // Lock the sensor
@@ -854,7 +854,7 @@ function startGameplay(category) {
   score = 0;
   correctWords = [];
   skippedWords = [];
-  timeLeft = 10;
+  timeLeft = 60;
   timerDisplay.innerText = timeLeft;
   timerDisplay.style.color = "#ff4757"; // Reset color to default (optional)
 
