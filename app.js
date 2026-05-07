@@ -657,6 +657,20 @@ const charadesData = [
       "Pipo",
       "El gordo",
       "Cristina",
+      "13 de septiembre",
+      "Piñas",
+      "7 de octubre",
+      "13 de junio",
+      "La Salle",
+      "Pompeu Fabra",
+      "Luigi",
+      "Hombres lobo",
+      "La Esquinica",
+      "El Manaba",
+      "La Oficina",
+      "La Desayunería",
+      "Lamerica",
+      "Chambala",
     ],
   },
 ];
@@ -766,12 +780,12 @@ function handleOrientation(event) {
     // depending on what feels natural when testing on your phone.
 
     if (tilt > 45) {
-      // Phone tilted DOWN (Screen pointing to the floor)
-      markCorrect();
-      isReadyForNextWord = false; // Lock the sensor
-    } else if (tilt < -45) {
       // Phone tilted UP (Screen pointing to the ceiling)
       skipWord();
+      isReadyForNextWord = false; // Lock the sensor
+    } else if (tilt < -45) {
+      // Phone tilted DOWN (Screen pointing to the floor)
+      markCorrect();
       isReadyForNextWord = false; // Lock the sensor
     }
   }
