@@ -12,9 +12,29 @@ p {
 }
 
 #current-word {
-  font-size: 450px;
-  font-weight: 700;
+  /* font-weight: 700; */
   color: #ffffff;
+  /* Test different sizes here. 4rem is default, try 5rem or 6rem */
+  /* font-size: 12rem; */
+
+  /* Adds a little breathing room on the sides so long words don't touch the screen edges
+  padding: 0 15px;
+
+  /* Forces incredibly long words to break onto a new line instead of overflowing */
+  /* word-wrap: break-word; */
+
+  /* Ensures the text stays perfectly centered */
+  /* text-align: center;
+
+  margin: 20px 0; */
+  /* No pongas el font-size aquí, lo controlaremos desde JS */
+  padding: 0 15px;
+  word-wrap: break-word;
+  text-align: center;
+  margin: 0;
+
+  /* Esto hace que si la frase tiene dos líneas, estén más pegaditas */
+  line-height: 1.1;
 }
 
 .hidden {
@@ -25,11 +45,12 @@ p {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   text-align: center;
   padding: 40px 20px;
   box-sizing: border-box; /* Prevents padding from breaking the 100vh height */
+  overflow: hidden;
 }
 
 /* --- The Grid Layout --- */
