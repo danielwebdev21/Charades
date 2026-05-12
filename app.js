@@ -373,7 +373,7 @@ const charadesData = [
   },
 
   {
-    category: "Personajes de Disney",
+    category: "Disney",
     words: [
       "Mickey Mouse",
       "Minnie Mouse",
@@ -1110,6 +1110,8 @@ let skippedWords = []; // Array para palabras saltadas
 
 const flashOverlay = document.getElementById("flash-overlay");
 const flashText = document.getElementById("flash-text");
+const correctSound = new Audio("./sounds/correct-sound.mp3");
+const skipSound = new Audio("./sounds/wrong-sound.mp3");
 
 let score = 0;
 let timeLeft = 60;
@@ -1312,15 +1314,18 @@ function showNextWord() {
 
   const length = currentWord.length;
 
-  if (length < 10) {
+  if (length <= 7) {
     // Palabras cortas (ej: "Perro", "Sol")
-    currentWordDisplay.style.fontSize = "12rem";
+    currentWordDisplay.style.fontSize = "10rem";
+  } else if (length > 7 && length < 10) {
+    // Palabras medianas (ej: "Harry Potter")
+    currentWordDisplay.style.fontSize = "8rem";
   } else if (length >= 10 && length < 20) {
     // Palabras medianas (ej: "Harry Potter")
-    currentWordDisplay.style.fontSize = "9rem";
+    currentWordDisplay.style.fontSize = "5rem";
   } else {
     // Frases largas (ej: "Catedral de Sal de Zipaquirá")
-    currentWordDisplay.style.fontSize = "5rem";
+    currentWordDisplay.style.fontSize = "4rem";
   }
 }
 
@@ -1377,6 +1382,9 @@ function triggerFeedback(text, bgColor, vibratePattern) {
 function markCorrect() {
   if (!playing) return;
 
+  correctSound.currentTime = 0;
+  correctSound.play();
+
   score++;
   correctWords.push(currentWord); // Guardar en la lista
 
@@ -1388,6 +1396,9 @@ function markCorrect() {
 
 function skipWord() {
   if (!playing) return;
+
+  skipSound.currentTime = 0;
+  skipSound.play();
 
   skippedWords.push(currentWord); // Guardar en la lista
 
